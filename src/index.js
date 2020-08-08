@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/home/Home';
 import * as serviceWorker from './serviceWorker';
+import 'mobx-react-lite/batchingForReactDom'
+
+import './css/tailwind.css'
+import 'animate.css';
 
 ReactDOM.render(
   <React.StrictMode>
