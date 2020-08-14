@@ -1,56 +1,51 @@
 import { decorate, action, observable } from 'mobx'
 
 class Store {
-  colors = {
-    first: '#FAF455',
-    second: '#4B4B4B',
-    third: '#FFF'
+  formDatas = {
+    colors: ['#FAF455', '#4B4B4B', '#FFF'],
+    name: "",
+    date_of_birth: "",
+    address: "",
+    phone: "",
+    email: "",
+    website: "",
+    socials: [],
+    position: "",
+    about: "",
+    skills: [],
+    educations: [],
+    experiences: [],
+    organizations: []
   }
 
-  isModalActive = false
-  modalContents = null
+  isSideBarActive = true
+  sideBarType = "color-picker"
 
-  setColors(colors) {
-    this.modalContents.values.color = colors.color
-    switch (colors.type) {
-      case 'first':
-        this.colors.first = colors.color
-        break;
-      case 'second':
-        this.colors.second = colors.color
-        break;
-      case 'third':
-        this.colors.third = colors.color
-        break;
-      default:
-        break;
+  setColor(color, index) {
+    if (color) {
+      this.formDatas.colors[index] = color
+    } else {
+      this.formDatas.colors = ['#FAF455', '#4B4B4B', '#FFF']
     }
   }
 
-  setModalActivedStatus(active) {
-    this.isModalActive = active
+  setSideBarActivedStatus(active) {
+    this.isSideBarActive = active
   }
 
-  setModalContents(contents) {
-    return new Promise((resolve, reject) => {
-      this.modalContents = contents
-      if (this.modalContents) {
-        resolve(true)
-      } else {
-        reject(false)
-      }
-    })
+  setSideBarType(type) {
+    this.sideBarType = type
   }
   
 }
 
 decorate(Store, {
-  colors: observable,
-  setColors: action,
-  isModalActive: observable,
-  setModalActivedStatus: action,
-  modalContents: observable,
-  setModalContents: action
+  formDatas: observable,
+  setColor: action,
+  isSideBarActive: observable,
+  setSideBarActivedStatus: action,
+  sideBarType: observable,
+  setSideBarType: action
 })
 
 const NewStore = new Store()
