@@ -3,6 +3,7 @@ import { decorate, action, observable } from 'mobx'
 class Store {
   formDatas = {
     colors: ['#FAF455', '#4B4B4B', '#FFF'],
+    image: {},
     name: "your name",
     date_of_birth: "",
     address: "",

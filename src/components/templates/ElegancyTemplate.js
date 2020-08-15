@@ -28,9 +28,6 @@ function SkillComponent(skill, color) {
 
 class ElegancyTemplate extends Component {
   inputFile = React.createRef()
-  state = {
-    file: null
-  }
 
   openFormUpload = () => {
     this.inputFile.current.click()
@@ -40,8 +37,9 @@ class ElegancyTemplate extends Component {
     let reader = new FileReader()
     let file = data.target.files[0]
     reader.onloadend = () => {
-      this.setState({
-        file: {
+      Store.setFormData({
+        type: "image",
+        value: {
           file, preview: reader.result
         }
       })
@@ -58,7 +56,6 @@ class ElegancyTemplate extends Component {
   }
 
   render() {
-    const { file } = this.state
     const { formDatas } = Store
 
     const firstColor = css`
@@ -107,7 +104,7 @@ class ElegancyTemplate extends Component {
         </div>
         <div className={cx(firstColor, "absolute h-full w-64 ml-6 flex justify-center")}>
           <img alt=""
-            src={file ? file.preview : ""}
+            src={formDatas.image.file ? formDatas.image.preview : ""}
             onClick={ this.openFormUpload }
             className="my-8 w-40 h-40 rounded-full block bg-gray-500 border-0 flex justify-center items-center cursor-pointer"
           />
