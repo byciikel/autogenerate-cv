@@ -9,6 +9,10 @@ function Form() {
     return (
       <ColorPicker />
     )
+  } else if (sideBarType === "input-name") {
+    return (
+      <div>asdas</div>
+    )
   } else {
     return (
       <div/>

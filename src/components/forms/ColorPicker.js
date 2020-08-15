@@ -23,6 +23,11 @@ class ColorPicker extends Component {
     this.setState({ selectedColor, colorIndex: index })
   }
 
+  onColorChange = (color, index) => {
+    this.setState({ selectedColor: color, colorIndex: index })
+    Store.setColor(color, index)
+  }
+
   render() {
     const { formDatas } = Store
     const { selectedColor, colorIndex } = this.state
@@ -30,7 +35,7 @@ class ColorPicker extends Component {
     return(
       <div>
         <p className="bold mb-5">Colors Setting</p>
-        <SketchPicker color={ selectedColor } onChange={(color) => Store.setColor(color.hex, colorIndex)} />
+        <SketchPicker color={ selectedColor } onChange={(color) => this.onColorChange(color.hex, colorIndex)} />
         <div className="flex items-center my-6">
           {formDatas.colors.map((color, index) => (
             <ColorSelect key={ index } color={ color } setColor={(selectedColor) => this.setSelectedColor(selectedColor, index)} />
