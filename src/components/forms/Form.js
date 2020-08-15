@@ -5,13 +5,9 @@ import ColorPicker from './ColorPicker'
 
 function Form() {
   const { sideBarType } = Store
-  if (sideBarType === "color-picker") {
+  if (sideBarType === "general") {
     return (
       <ColorPicker />
-    )
-  } else if (sideBarType === "input-name") {
-    return (
-      <div>asdas</div>
     )
   } else {
     return (

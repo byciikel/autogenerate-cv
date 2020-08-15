@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { css } from 'emotion'
+import { cx, css } from 'emotion'
 import { observer } from 'mobx-react'
 import FitText from '@kennethormandy/react-fittext'
 import Store from '../../stores/Store'
@@ -20,7 +20,7 @@ function SkillComponent(skill, color) {
     <div className="w-1/2 text-sm my-1 px-2 font-poppins flex flex-wrap justify-between items-center">
       <div>{ skill.name }</div>
       <div className="w-24 h-3 bg-gray-500">
-        <div className={ backgroundColor + " " + scaleUpWidth + " z-10" } />
+        <div className={ cx(backgroundColor, scaleUpWidth, "z-10") } />
       </div>
     </div>
   )
@@ -74,18 +74,18 @@ class ElegancyTemplate extends Component {
     return (
       <div className="w-full flex relative">
         <div className="w-full grid grid-rows-2">
-          <div className={ secondColor + " " + this.checkColor(formDatas.colors[1]) }>
+          <div className={ cx(secondColor, this.checkColor(formDatas.colors[1])) }>
             <div className="biography-section">
               <div className="font-poppins header-1 header-bold">
                 <FitText compressor={1.5}>
                   { formDatas.name }
                 </FitText>
               </div>
-              <div className={firstColor + " " + this.checkColor(formDatas.colors[0]) + " text-black w-auto inline-block font-poppins header-2 py-1 px-5 my-5"}>
+              <div className={cx(firstColor, this.checkColor(formDatas.colors[0]), "text-black w-auto inline-block font-poppins header-2 py-1 px-5 my-5")}>
                 { formDatas.position }
               </div>
               <div className="font-poppins header-2 header-bold tracking-widest">about me</div>
-              <div className="font-poppins text-white my-3 text-justify">
+              <div className="font-poppins my-3 text-justify">
                 <FitText compressor={3.5} maxFontSize={14}>
                   { formDatas.about }
                 </FitText>
@@ -105,7 +105,7 @@ class ElegancyTemplate extends Component {
           </div>
           <div className={ thirdColor }></div>
         </div>
-        <div className={firstColor + " absolute h-full w-64 ml-6 flex justify-center"}>
+        <div className={cx(firstColor, "absolute h-full w-64 ml-6 flex justify-center")}>
           <img alt=""
             src={file ? file.preview : ""}
             onClick={ this.openFormUpload }

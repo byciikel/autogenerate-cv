@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { cx } from 'emotion'
 import { observer } from 'mobx-react'
 import Store from '../../stores/Store'
-import IosMenu from 'react-ionicons/lib/IosMenu'
 
 class Navigation extends Component {
   navigate = (nav) => {
@@ -23,21 +23,19 @@ class Navigation extends Component {
           <nav className="flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
             <div onClick={() => this.navigate("editor")}
               className={
-                `${activeNav === 'editor' ? "bg-gray-200" : ""}` +
-                " px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer"
+                cx(activeNav === 'editor' ? "bg-gray-200" : "",
+                "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer")
               }
             >
               Editor
             </div>
             <div onClick={() => this.navigate("preview")}
               className={
-                `${activeNav === 'preview' ? "bg-gray-200" : ""}` +
-                " px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer"}
+                cx(activeNav === 'preview' ? "bg-gray-200" : "",
+                "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer")
+              }
             >
               Preview
-            </div>
-            <div className="py-2 px-4 cursor-pointer" onClick={() => Store.setSideBarActivedStatus(Store.isSideBarActive ? false : true)}>
-              <IosMenu />
             </div>
           </nav>
         </div>

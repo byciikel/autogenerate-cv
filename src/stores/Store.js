@@ -25,8 +25,18 @@ class Store {
     organizations: []
   }
 
-  isSideBarActive = true
-  sideBarType = "color-picker"
+  sideMenu = [
+    { name: "general", icon: "cog-outline" },
+    { name: "biography", icon: "person-circle-outline" },
+    { name: "skills", icon: "star-half-outline" },
+    { name: "interests", icon: "american-football-outline" },
+    { name: "educations", icon: "school-outline" },
+    { name: "experiences", icon: "document-text-outline" },
+    { name: "socials", icon: "chatbubbles-outline" },
+  ]
+
+  isSideBarActive = false
+  sideBarType = null
 
   setColor(color, index) {
     if (color) {
@@ -52,6 +62,7 @@ class Store {
 
 decorate(Store, {
   formDatas: observable,
+  sideMenu: observable,
   setColor: action,
   isSideBarActive: observable,
   setSideBarActivedStatus: action,
