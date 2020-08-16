@@ -23,16 +23,44 @@ class Store {
       { name: "Fawwaz Afif Alvian", icon: "logo-twitter", link: "https://www.google.com/" },
       { name: "Fawwaz Afif Alvian", icon: "logo-linkedin", link: "https://www.google.com/" },
     ],
-    skills: [
-      { name: "Microsoft", amount: 4 },
-      { name: "Photoshop", amount: 3.5 },
-      { name: "Illustrator", amount: 4 },
-      { name: "Indesign", amount: 3 },
-      { name: "Coreldraw", amount: 2 },
-      { name: "Premiere", amount: 5 },
+    skills: {
+      skills : [
+        { name: "Microsoft", amount: 4 },
+        { name: "Photoshop", amount: 3.5 },
+        { name: "Illustrator", amount: 4 },
+        { name: "Indesign", amount: 3 },
+        { name: "Coreldraw", amount: 2 },
+        { name: "Premiere", amount: 5 },
+      ],
+      interests : [
+        { name: "Design", icon: "color-palette-outline" },
+        { name: "Computer", icon: "desktop-outline" },
+        { name: "Game", icon: "game-controller-outline" },
+        { name: "Design", icon: "color-palette-outline" },
+        { name: "Computer", icon: "desktop-outline" },
+        { name: "Game", icon: "game-controller-outline" },
+        { name: "Design", icon: "color-palette-outline" },
+        { name: "Computer", icon: "desktop-outline" },
+        { name: "Game", icon: "game-controller-outline" },
+        { name: "Design", icon: "color-palette-outline" },
+        { name: "Computer", icon: "desktop-outline" },
+        { name: "Game", icon: "game-controller-outline" },
+      ]
+    },
+    educations: [
+      { start: '2013', end: '2016', type: 'senior high school', name: 'MAN Sidoarjo', majors: '' },
+      { start: '2016', end: '2020', type: 'college', name: 'Universitas Islam Negeri Sunan Ampel Surabaya', majors: 'Information System' },
     ],
-    educations: [],
-    experiences: [],
+    experiences: [
+      { start: '2018', end: '2019', type: 'crew', name: 'Big Bad Wolf Surabaya' },
+      { start: '2018', end: '2019', type: 'crew', name: 'DBL Surabaya' },
+      { start: '2019', end: '2020', type: 'internship', name: 'Kemenag Jawa Timur' },
+      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', type: 'internship', name: 'Kemenag Jawa Timur' },
+      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
+    ],
     organizations: []
   }
 

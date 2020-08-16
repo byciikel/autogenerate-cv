@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { cx, css } from 'emotion'
+import * as _ from 'lodash'
 import { observer } from 'mobx-react'
 import FitText from '@kennethormandy/react-fittext'
 import Store from '../../stores/Store'
@@ -57,8 +58,38 @@ function SocialMediaComponent(social) {
   )
 }
 
+function ExperienceComponent(data) {
+  const { formDatas } = Store
+  const firstColor = css`
+    background-color: ${formDatas.colors[0]};
+  `
+  return (
+    <div className="w-1/2 text-sm my-1 font-poppins flex flex-col items-start">
+      <div className={cx(firstColor, checkColor(formDatas.colors[0]), "w-auto inline-block header-bold py-1 px-3 mb-2")}>
+        { data.start }-{ data.end }
+      </div>
+      <div className="capitalize header-bold mb-1">{ data.type }</div>
+      <div className="italic mb-1">{ data.name }</div>
+    </div>
+  )
+}
+
+function InterestComponent(interest) {
+  const { formDatas } = Store
+  return (
+    <div className={ cx(css`color: ${formDatas.colors[0]}`, "w-1/3 text-sm font-poppins flex flex-col mb-5") }>
+      <div className="text-2xl text-center flex items-center justify-center">
+        <ion-icon name={ interest.icon }></ion-icon>
+      </div>
+      <p className={ cx(css`font-size: .7rem`, "text-center") }>{ interest.name }</p>
+    </div>
+  )
+}
+
 class ElegancyTemplate extends Component {
   inputFile = React.createRef()
+  eduRef = React.createRef()
+  expRef = React.createRef()
 
   openFormUpload = () => {
     this.inputFile.current.click()
@@ -90,58 +121,81 @@ class ElegancyTemplate extends Component {
     const thirdColor = css`
       background-color: ${formDatas.colors[2]};
     `
+    const chunkOfExperiences = _.chunk(formDatas.experiences, 6)
 
     return (
       <div className="w-full flex relative">
         <div className="w-full grid grid-rows-2">
-          <div className={ cx(secondColor, checkColor(formDatas.colors[1])) }>
-            <div className="biography-section">
-              <div className="font-poppins header-1 header-bold">
-                <FitText compressor={1.5}>
-                  { formDatas.bio.basic.name }
-                </FitText>
-              </div>
-              <div className={cx(firstColor, checkColor(formDatas.colors[0]), "text-black w-auto inline-block font-poppins header-2 py-1 px-5 my-5")}>
-                { formDatas.bio.basic.position }
-              </div>
-              <div className="font-poppins header-2 header-bold tracking-widest my-3">about me</div>
-              <div className="font-poppins text-justify">
-                <FitText compressor={3.5} maxFontSize={14}>
-                  { formDatas.bio.basic.about }
-                </FitText>
-              </div>
+          <div className={ cx(secondColor, checkColor(formDatas.colors[1]), css`padding-left: 20.5rem;`, "p-12") }>
+            <div className="font-poppins header-1 header-bold">
+              <FitText compressor={1.5}>
+                { formDatas.bio.basic.name }
+              </FitText>
+            </div>
+            <div className={cx(firstColor, checkColor(formDatas.colors[0]), "w-auto inline-block font-poppins header-2 py-1 px-5 my-5")}>
+              { formDatas.bio.basic.position }
+            </div>
+            <div className="font-poppins header-2 header-bold tracking-widest my-3">about me</div>
+            <div className={ cx(css`max-height: 10rem;`, "font-poppins text-justify overflow-hidden") }>
+              <FitText compressor={3.5} maxFontSize={14}>
+                { formDatas.bio.basic.about }
+              </FitText>
             </div>
 
-            <div className="skills-section">
-              <div className="font-poppins header-2 header-bold tracking-widest my-3">my skills</div>
-              <div className="px-2">
-                <div className="flex flex-wrap my-3 -mx-4">
-                  { formDatas.skills.map((skill, index) => (
-                    <SkillComponent key={ index } { ...skill } />
-                  )) }
-                </div>
+            <div className="font-poppins header-2 header-bold tracking-widest my-3 mt-5">my skills</div>
+            <div className={ cx(css`max-height: 6rem;`, "px-2 overflow-hidden") }>
+              <div className="flex flex-wrap my-3 -mx-4">
+                { formDatas.skills.skills.map((skill, index) => (
+                  <SkillComponent key={ index } { ...skill } />
+                )) }
               </div>
             </div>
           </div>
-          <div className={ thirdColor }></div>
+          <div className={ cx(thirdColor, checkColor(formDatas.colors[2]), css`padding-left: 20.5rem;`, "px-12 py-8") }>
+            <div className="font-poppins header-2 header-bold tracking-widest my-3">educations</div>
+            <div className="flex flex-wrap">
+              { formDatas.educations.map((edu, index) => (
+                <ExperienceComponent key={ index } { ...edu } />
+              ) )}
+            </div>
+          
+            <div className="font-poppins header-2 header-bold tracking-widest my-3">experiences</div>
+            <div className="flex flex-wrap">
+              { chunkOfExperiences[0].map((exp, index) => (
+                <ExperienceComponent key={ index } { ...exp } />
+              ) )}
+            </div>
+          </div>
         </div>
-        <div className={cx(firstColor, checkColor(formDatas.colors[0]), "absolute h-full w-64 ml-6 flex flex-col items-center")}>
-          <img alt=""
-            src={formDatas.image.file ? formDatas.image.preview : ""}
-            onClick={ this.openFormUpload }
-            className="my-8 w-40 h-40 rounded-full block bg-gray-500 border-0 flex justify-center items-center cursor-pointer"
-          />
-          <input className="hidden" type="file" ref={ this.inputFile } onChange={(data) => this.onUploadImage(data)} />
-          <div className={cx(css`height: 60%`, "w-full py-2 px-6")}>
+        <div className={cx(firstColor, checkColor(formDatas.colors[0]), "absolute h-full w-64 ml-6 flex flex-col items-center font-poppins")}>
+          <div>
+            <img alt=""
+              src={formDatas.image.file ? formDatas.image.preview : ""}
+              onClick={ this.openFormUpload }
+              className="my-8 w-40 h-40 rounded-full block bg-gray-500 border-0 flex justify-center items-center cursor-pointer"
+            />
+            <input className="hidden" type="file" ref={ this.inputFile } onChange={(data) => this.onUploadImage(data)} />
+          </div>
+          <div className="w-full py-2 px-6 mb-5">
             <div className="mb-10">
               { Object.entries(formDatas.bio.specific).map(([name, value], index) => (
                 <SpecificBioComponent key={ index } name={ name } value={ value } />
               )) }
             </div>
-            <div className="font-poppins header-2 header-bold tracking-widest mt-y mb-3">social media</div>
+            
+            <div className="header-2 header-bold tracking-widest mt-y mb-3">social media</div>
             { formDatas.socials.map((social, index) => (
               <SocialMediaComponent key={ index } { ...social } />
             )) }
+          </div>
+
+          <div className={ cx(secondColor, checkColor(formDatas.colors[1]), "w-full h-full bg-green-500 py-2 px-6") }>
+            <p className="uppercase tracking-widest mb-3">interest</p>
+            <div className="flex flex-wrap">
+              { formDatas.skills.interests.map((interest, index) => (
+                <InterestComponent key={ index } { ...interest } />
+              )) }
+            </div>
           </div>
         </div>
       </div>

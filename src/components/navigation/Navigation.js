@@ -5,7 +5,7 @@ import Store from '../../stores/Store'
 
 class Navigation extends Component {
   navigate = (nav) => {
-    if (nav ==='editor') {
+    if (nav === 'editor') {
       Store.setSideBarActivedStatus(true)
     }
     this.props.onNavigate(nav)
