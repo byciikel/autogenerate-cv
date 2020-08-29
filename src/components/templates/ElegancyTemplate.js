@@ -1,204 +1,231 @@
 import React, { Component } from 'react'
-import { cx, css } from 'emotion'
-import * as _ from 'lodash'
 import { observer } from 'mobx-react'
-import FitText from '@kennethormandy/react-fittext'
+import { PDFViewer } from '@react-pdf/renderer';
+import { Document, Page, StyleSheet, View, Text, Font, Image } from '@react-pdf/renderer';
+
 import Store from '../../stores/Store'
 import { lightOrDark } from '../CheckColor'
+import PoppinsRegular from '../../fonts/poppins/Poppins-Regular.ttf'
+import PoppinsBold from '../../fonts/poppins/Poppins-Bold.ttf'
 
-import './index.css'
+Font.register({ family: 'Poppins', fonts: [
+  { src: PoppinsRegular, fontWeight: 400 },
+  { src: PoppinsBold, fontWeight: 700 }
+]})
 
-
-function checkColor(color) {
-  if (lightOrDark(color) === 'light') {
-    return 'text-black'
-  } else {
-    return 'text-white'
-  }
-}
-
-function SkillComponent(skill) {
-  const { formDatas } = Store
-  const scaleUpWidth = css`
-    width: ${skill.amount*20}%;
-    height: inherit;
-  `
-  const backgroundColor = css`
-    background-color: ${formDatas.colors[0]};
-  `
-  return (
-    <div className="w-1/2 text-sm my-1 px-2 font-poppins flex flex-wrap justify-between items-center">
-      <div>{ skill.name }</div>
-      <div className="w-24 h-3 bg-gray-500">
-        <div className={ cx(backgroundColor, scaleUpWidth, "z-10") } />
-      </div>
-    </div>
-  )
-}
-
-function SpecificBioComponent({ name, value }) {
-  const newName = name.split("_").join(" ")
-  return (
-    <div className="mb-5">
-      <div className="capitalize font-poppins header-bold mb-1">{ newName }:</div>
-      <div className="capitalize font-poppins text-sm">{ value }</div>
-    </div>
-  )
-}
-
-function SocialMediaComponent(social) {
-  const { formDatas } = Store
-  return (
-    <a href={ social.link } className="flex items-center mb-3">
-      <div className={cx(css`background-color: ${formDatas.colors[1]}`, checkColor(formDatas.colors[1]), "flex items-center p-2 rounded-full mr-5")}>
-        <ion-icon name={ social.icon }></ion-icon>
-      </div>
-      <p className="font-poppins header-bold text-sm">{ social.name }</p>
-    </a>
-  )
-}
-
-function ExperienceComponent(data) {
-  const { formDatas } = Store
-  const firstColor = css`
-    background-color: ${formDatas.colors[0]};
-  `
-  return (
-    <div className="w-1/2 text-sm my-1 font-poppins flex flex-col items-start">
-      <div className={cx(firstColor, checkColor(formDatas.colors[0]), "w-auto inline-block header-bold py-1 px-3 mb-2")}>
-        { data.start }-{ data.end }
-      </div>
-      <div className="capitalize header-bold mb-1">{ data.type }</div>
-      <div className="italic mb-1">{ data.name }</div>
-    </div>
-  )
-}
-
-function InterestComponent(interest) {
-  const { formDatas } = Store
-  return (
-    <div className={ cx(css`color: ${formDatas.colors[0]}`, "w-1/3 text-sm font-poppins flex flex-col mb-5") }>
-      <div className="text-2xl text-center flex items-center justify-center">
-        <ion-icon name={ interest.icon }></ion-icon>
-      </div>
-      <p className={ cx(css`font-size: .7rem`, "text-center") }>{ interest.name }</p>
-    </div>
-  )
+const checkColor = (color) => {
+  if (lightOrDark(color) === 'light') return '#000'
+  return '#fff'
 }
 
 class ElegancyTemplate extends Component {
-  inputFile = React.createRef()
-  eduRef = React.createRef()
-  expRef = React.createRef()
+  render() {
 
-  openFormUpload = () => {
-    this.inputFile.current.click()
-  }
+    const styles = StyleSheet.create({
+      page: {
+        fontFamily: 'Poppins',
+        flexDirection: 'row',
+        backgroundColor: '#FFF'
+      },
+      firstSection: {
+        flex: 'flex',
+        alignItems: 'center',
+        position: "absolute",
+        width: '200px',
+        height: '100vh',
+        left: '23px',
+        backgroundColor: Store.formDatas.colors[0],
+        color: checkColor(Store.formDatas.colors[0])
+      },
+      secondSection: {
+        position: "absolute",
+        width: '100vw',
+        height: '50vh',
+        backgroundColor: Store.formDatas.colors[1],
+        paddingLeft: '246pt',
+        paddingRight: '24pt',
+        paddingVertical: '24pt',
+        color: checkColor(Store.formDatas.colors[1])
+      },
+      thirdSection: {
+        position: "absolute",
+        width: '100vw',
+        height: '50vh',
+        backgroundColor: Store.formDatas.colors[2]
+      },
+      leftPanel: {
+        height: '100%',
+        marginHorizontal: '24pt',
+        marginBottom: '24pt'
+      },
+      heading1: {
+        fontWeight: 700,
+        fontSize: '21pt',
+        textTransform: "uppercase",
+      },
+      heading2: {
+        fontWeight: 700,
+        fontSize: '10.5pt',
+        textTransform: 'uppercase',
+        marginVertical: '7pt',
+        letterSpacing: '1.8pt'
+      },
+      subHeading: {
+        alignSelf: 'flex-start',
+        backgroundColor: Store.formDatas.colors[0],
+        color: checkColor(Store.formDatas.colors[0]),
+        paddingHorizontal: '10pt',
+        paddingVertical: '3pt',
+        marginVertical: '7pt',
+        fontSize: '10.5pt',
+        textTransform: 'uppercase'
+      },
+      paragraph: {
+        fontSize: '10pt',
+        textAlign: 'justify'
+      },
+      skillWrap: {
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "row",
+        justifyContent: "space-between"
+      },
+      image: {
+        width: '120pt',
+        height: '120pt',
+        borderRadius: '60pt',
+        backgroundColor: '#a0aec0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: '24pt'
+      }
+    });
 
-  onUploadImage = (data) => {
-    let reader = new FileReader()
-    let file = data.target.files[0]
-    reader.onloadend = () => {
-      Store.setFormData({
-        type: "image",
-        value: {
-          file, preview: reader.result
+    const SkillComponent = (skill) => {
+      const skillStyles = StyleSheet.create({
+        wrap: {
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: 'row',
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: '45%',
+          marginVertical: '3pt'
+        },
+        bar: {
+          width: '72pt',
+          height: '8pt',
+          backgroundColor: '#a0aec0'
+        },
+        barActive: {
+          width: `${ skill.amount * 20 }%`,
+          height: '8pt',
+          backgroundColor: Store.formDatas.colors[0]
         }
       })
+
+      return (
+        <View style={ skillStyles.wrap }>
+          <Text style={ styles.paragraph }>{ skill.name }</Text>
+          <View style={ skillStyles.bar }>
+            <View style={ skillStyles.barActive }></View>
+          </View>
+        </View>
+      )
     }
-    reader.readAsDataURL(file)
-  }
 
-  render() {
-    const { formDatas } = Store
+    const SpecificBioComponent = ({ name, value }) => {
+      const bioStyles = StyleSheet.create({
+        wrap: {
+          marginBottom: '15pt'
+        },
+        p1: {
+          fontSize: '10pt',
+          fontWeight: 700,
+          textTransform: 'capitalize'
+        },
+        p2: {
+          fontSize: '10pt',
+          textTransform: 'capitalize'
+        }
+      })
+      const newName = name.split("_").join(" ")
 
-    const firstColor = css`
-      background-color: ${formDatas.colors[0]};
-    `
-    const secondColor = css`
-      background-color: ${formDatas.colors[1]};
-    `
-    const thirdColor = css`
-      background-color: ${formDatas.colors[2]};
-    `
-    const chunkOfExperiences = _.chunk(formDatas.experiences, 6)
+      return (
+        <View style={ bioStyles.wrap }>
+          <Text style={ bioStyles.p1 }>{ newName }:</Text>
+          <Text style={ bioStyles.p2 }>{ value }</Text>
+        </View>
+      )
+    }
 
-    return (
-      <div className="w-full flex relative">
-        <div className="w-full grid grid-rows-2">
-          <div className={ cx(secondColor, checkColor(formDatas.colors[1]), css`padding-left: 20.5rem;`, "p-12") }>
-            <div className="font-poppins header-1 header-bold">
-              <FitText compressor={1.5}>
-                { formDatas.bio.basic.name }
-              </FitText>
-            </div>
-            <div className={cx(firstColor, checkColor(formDatas.colors[0]), "w-auto inline-block font-poppins header-2 py-1 px-5 my-5")}>
-              { formDatas.bio.basic.position }
-            </div>
-            <div className="font-poppins header-2 header-bold tracking-widest my-3">about me</div>
-            <div className={ cx(css`max-height: 10rem;`, "font-poppins text-justify overflow-hidden") }>
-              <FitText compressor={3.5} maxFontSize={14}>
-                { formDatas.bio.basic.about }
-              </FitText>
-            </div>
+    const SocialMediaComponent = (social) => {
+      const socialStyles = StyleSheet.create({
+        wrap: {
+          marginBottom: '15pt'
+        },
+        p1: {
+          fontSize: '10pt',
+          fontWeight: 700,
+          textTransform: 'capitalize'
+        }
+      })
+      return (
+        <View style={ socialStyles.wrap }>
+          <Text style={ socialStyles.p1 }>{ social.name }</Text>
+        </View>
+      )
+    }
 
-            <div className="font-poppins header-2 header-bold tracking-widest my-3 mt-5">my skills</div>
-            <div className={ cx(css`max-height: 6rem;`, "px-2 overflow-hidden") }>
-              <div className="flex flex-wrap my-3 -mx-4">
-                { formDatas.skills.skills.map((skill, index) => (
-                  <SkillComponent key={ index } { ...skill } />
+    const FirstPage = () => {
+      return (
+        <Page size="A4" style={styles.page}>
+          <View>
+            <View>
+              <View style={ styles.secondSection }>
+                <Text style={ styles.heading1 }>
+                  { Store.formDatas.bio.basic.name }
+                </Text>
+                <View style={ styles.subHeading }>
+                  <Text>{ Store.formDatas.bio.basic.position }</Text>
+                </View>
+                <Text style={ styles.heading2 }>about me</Text>
+                <Text style={ styles.paragraph }>
+                  { Store.formDatas.bio.basic.about}
+                </Text>
+                <Text style={ styles.heading2 }>my skills</Text>
+                  <View style={ styles.skillWrap }>
+                    { Store.formDatas.skills.skills.map((skill, index) => (
+                      <SkillComponent key={ index } { ...skill } />
+                    )) }
+                  </View>
+              </View>
+              <View style={ styles.thirdSectiion }></View>
+            </View>
+            <View style={ styles.firstSection }>
+              <View style={ styles.image }></View>
+              <View style={ styles.leftPanel }>
+                { Object.entries(Store.formDatas.bio.specific).map(([name, value], index) => (
+                  <SpecificBioComponent key={ index } name={ name } value={ value } />
                 )) }
-              </div>
-            </div>
-          </div>
-          <div className={ cx(thirdColor, checkColor(formDatas.colors[2]), css`padding-left: 20.5rem;`, "px-12 py-8") }>
-            <div className="font-poppins header-2 header-bold tracking-widest my-3">educations</div>
-            <div className="flex flex-wrap">
-              { formDatas.educations.map((edu, index) => (
-                <ExperienceComponent key={ index } { ...edu } />
-              ) )}
-            </div>
-          
-            <div className="font-poppins header-2 header-bold tracking-widest my-3">experiences</div>
-            <div className="flex flex-wrap">
-              { chunkOfExperiences[0].map((exp, index) => (
-                <ExperienceComponent key={ index } { ...exp } />
-              ) )}
-            </div>
-          </div>
-        </div>
-        <div className={cx(firstColor, checkColor(formDatas.colors[0]), "absolute h-full w-64 ml-6 flex flex-col items-center font-poppins")}>
-          <div>
-            <img alt=""
-              src={formDatas.image.file ? formDatas.image.preview : ""}
-              onClick={ this.openFormUpload }
-              className="my-8 w-40 h-40 rounded-full block bg-gray-500 border-0 flex justify-center items-center cursor-pointer"
-            />
-            <input className="hidden" type="file" ref={ this.inputFile } onChange={(data) => this.onUploadImage(data)} />
-          </div>
-          <div className="w-full py-2 px-6 mb-5">
-            <div className="mb-10">
-              { Object.entries(formDatas.bio.specific).map(([name, value], index) => (
-                <SpecificBioComponent key={ index } name={ name } value={ value } />
-              )) }
-            </div>
-            
-            <div className="header-2 header-bold tracking-widest mt-y mb-3">social media</div>
-            { formDatas.socials.map((social, index) => (
-              <SocialMediaComponent key={ index } { ...social } />
-            )) }
-          </div>
-
-          <div className={ cx(secondColor, checkColor(formDatas.colors[1]), "w-full h-full bg-green-500 py-2 px-6") }>
-            <p className="uppercase tracking-widest mb-3">interest</p>
-            <div className="flex flex-wrap">
-              { formDatas.skills.interests.map((interest, index) => (
-                <InterestComponent key={ index } { ...interest } />
-              )) }
-            </div>
-          </div>
-        </div>
-      </div>
+                <Text style={ styles.heading2 }>social media</Text>
+                { Store.formDatas.socials.map((social, index) => (
+                  <SocialMediaComponent key={ index } { ...social } />
+                )) }
+              </View>
+            </View>
+          </View>
+        </Page>
+      )
+    }
+  
+    return (
+      <PDFViewer className="w-full h-screen">
+        <Document title={ Store.formDatas.fileName }>
+          <FirstPage />
+        </Document>
+      </PDFViewer>
     )
   }
 }

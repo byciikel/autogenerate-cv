@@ -2,13 +2,14 @@ import { decorate, action, observable } from 'mobx'
 
 class Store {
   formDatas = {
+    fileName: "AutoGenerateCV",
     colors: ['#FAF455', '#4B4B4B', '#FFF'],
     image: {},
     bio: {
       basic: {
         name: "your name",
         position: "desirable position",
-        about: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rutrum elit a interdum bibendum. Nunc id ultrices mi. Mauris at elit at ipsum tempus congue mattis vel neque. Maecenas tellus elit, placerat non odio sed, malesuada fermentum eros. Nam at ipsum nec mauris pellentesque ultricies. Sed laoreet ex metus, sit amet volutpat leo bibendum a. Vestibulum auctor ante eu risus mattis imperdiet. Morbi id fringilla metus. Sed quis fermentum magna. Praesent placerat, quam at mollis pharetra, magna arcu convallis libero, at rutrum tellus neque venenatis sapien. Nulla scelerisque congue metus, at egestas nisi. Aenean at porttitor purus. Phasellus at egestas.",
       },
       specific: {
         date_of_birth: "10 December 1998",
@@ -31,6 +32,8 @@ class Store {
         { name: "Indesign", amount: 3 },
         { name: "Coreldraw", amount: 2 },
         { name: "Premiere", amount: 5 },
+        { name: "MS Word", amount: 2 },
+        { name: "Power Point", amount: 1.5 },
       ],
       interests : [
         { name: "Design", icon: "color-palette-outline" },
@@ -63,6 +66,8 @@ class Store {
     ],
     organizations: []
   }
+
+  activeTemplate = "Elegancy"
 
   sideMenu = [
     { name: "general", icon: "cog-outline" },
@@ -101,6 +106,7 @@ class Store {
 
 decorate(Store, {
   formDatas: observable,
+  activeTemplate: observable,
   sideMenu: observable,
   setColor: action,
   isSideBarActive: observable,

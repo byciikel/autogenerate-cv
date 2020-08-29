@@ -16,7 +16,7 @@ export class SideBar extends Component {
             cx(isSideBarActive ? 'animate__slideInRight' : 'animate__slideOutRight',
             "animate__animated  bg-white h-full overflow-y-auto shadow-xl z-40")
           }>
-          <div className="flex flex-col items-start px-4 mt-24">
+          <div className="flex flex-col items-start p-4">
             <Form />
           </div>
         </div>

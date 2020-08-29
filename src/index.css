@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 .side-menu {
-  margin-left: 0;
-  margin-right: -6.5rem;
+  margin-right: 0;
+  margin-left: -6.5rem;
 }
 
 .side-menu:hover {
-  margin-left: -6.5rem;
-  margin-right: 0;
+  margin-right: -6.5rem;
+  margin-left: 0;
   animation: heartBeat;
   animation-duration: 2s;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
 }
