@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
-import { PDFViewer } from '@react-pdf/renderer';
-import { Document, Page, StyleSheet, View, Text, Font, Image } from '@react-pdf/renderer';
+import { PDFViewer, Document, Page, StyleSheet, View, Text, Font, Link } from '@react-pdf/renderer';
+import * as _ from 'lodash'
 
 import Store from '../../stores/Store'
 import { lightOrDark } from '../CheckColor'
 import PoppinsRegular from '../../fonts/poppins/Poppins-Regular.ttf'
 import PoppinsBold from '../../fonts/poppins/Poppins-Bold.ttf'
+import SvgIcon from '../svgs/SvgIcon'
 
 Font.register({ family: 'Poppins', fonts: [
   { src: PoppinsRegular, fontWeight: 400 },
@@ -35,10 +36,10 @@ class ElegancyTemplate extends Component {
         height: '100vh',
         left: '23px',
         backgroundColor: Store.formDatas.colors[0],
-        color: checkColor(Store.formDatas.colors[0])
+        color: checkColor(Store.formDatas.colors[0]),
       },
       secondSection: {
-        position: "absolute",
+        position: "relative",
         width: '100vw',
         height: '50vh',
         backgroundColor: Store.formDatas.colors[1],
@@ -48,15 +49,17 @@ class ElegancyTemplate extends Component {
         color: checkColor(Store.formDatas.colors[1])
       },
       thirdSection: {
-        position: "absolute",
+        position: "relative",
         width: '100vw',
         height: '50vh',
-        backgroundColor: Store.formDatas.colors[2]
+        backgroundColor: Store.formDatas.colors[2],
+        paddingLeft: '246pt',
+        paddingRight: '24pt',
+        paddingVertical: '24pt',
+        color: checkColor(Store.formDatas.colors[2])
       },
       leftPanel: {
-        height: '100%',
         marginHorizontal: '24pt',
-        marginBottom: '24pt'
       },
       heading1: {
         fontWeight: 700,
@@ -65,6 +68,12 @@ class ElegancyTemplate extends Component {
       },
       heading2: {
         fontWeight: 700,
+        fontSize: '10.5pt',
+        textTransform: 'uppercase',
+        marginVertical: '7pt',
+        letterSpacing: '1.8pt'
+      },
+      heading3: {
         fontSize: '10.5pt',
         textTransform: 'uppercase',
         marginVertical: '7pt',
@@ -84,7 +93,7 @@ class ElegancyTemplate extends Component {
         fontSize: '10pt',
         textAlign: 'justify'
       },
-      skillWrap: {
+      colWrap: {
         display: "flex",
         flexWrap: "wrap",
         flexDirection: "row",
@@ -99,6 +108,16 @@ class ElegancyTemplate extends Component {
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: '24pt'
+      },
+      interest: {
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: Store.formDatas.colors[1],
+        color: checkColor(Store.formDatas.colors[1]),
+        width: '200px',
+        height: '30%',
+        padding: '24pt',
+        paddingTop: '19pt'
       }
     });
 
@@ -163,22 +182,112 @@ class ElegancyTemplate extends Component {
     const SocialMediaComponent = (social) => {
       const socialStyles = StyleSheet.create({
         wrap: {
-          marginBottom: '15pt'
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: 'row',
+          alignItems: "center",
+          marginBottom: '15pt',
         },
         p1: {
           fontSize: '10pt',
           fontWeight: 700,
-          textTransform: 'capitalize'
+          textTransform: 'capitalize',
+          marginLeft: '5pt',
+          color: checkColor(Store.formDatas.colors[0])
+        }
+      })
+      
+      return (
+        <Link src={ social.link } style={ socialStyles.wrap }>
+          <SvgIcon
+            name={ social.icon }
+            color={ Store.formDatas.colors[1] }
+            width="20pt"
+            height="20pt"
+          />
+          <Text style={ socialStyles.p1 }>{ social.name }</Text>
+        </Link>
+      )
+    }
+
+    const InterestComponent = (interest) => {
+      const interestStyles = StyleSheet.create({
+        wrap: {
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: 'column',
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: '30%',
+          marginVertical: '10pt',
+        },
+        p1: {
+          fontSize: '8pt',
+          textTransform: 'capitalize',
+          color: checkColor(Store.formDatas.colors[1])
+        }
+      })
+      
+      return (
+        <View style={ interestStyles.wrap }>
+          <SvgIcon
+            name={ interest.icon }
+            color={ Store.formDatas.colors[0] }
+            width="15pt"
+            height="15pt"
+          />
+          <Text style={ interestStyles.p1 }>{ interest.name }</Text>
+        </View>
+      )
+    }
+
+    const ExperienceComponent = (data) => {
+      const expStyles = StyleSheet.create({
+        wrap: {
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: 'column',
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          width: '45%',
+          marginVertical: '3pt',
+          marginBottom: '10pt'
+        },
+        date: {
+          fontSize: '10pt',
+          fontWeight: 700,
+          textTransform: 'capitalize',
+          backgroundColor: Store.formDatas.colors[0],
+          paddingHorizontal: '10pt',
+          paddingVertical: '2pt',
+          marginBottom: '6pt'
+        },
+        p1: {
+          fontSize: '10pt',
+          fontWeight: 700,
+          textTransform: 'capitalize',
+          marginBottom: '2pt'
+        },
+        p2: {
+          fontSize: '10pt',
+          textTransform: 'capitalize',
+          marginBottom: '2pt'
         }
       })
       return (
-        <View style={ socialStyles.wrap }>
-          <Text style={ socialStyles.p1 }>{ social.name }</Text>
+        <View style={ expStyles.wrap }>
+          <View style={ expStyles.date }>
+            <Text>{ data.start }-{ data.end }</Text>
+          </View>
+          <Text style={ expStyles.p1 }>{ data.type }</Text>
+          <Text style={ expStyles.p2 }>{ data.name }</Text>
         </View>
       )
     }
 
     const FirstPage = () => {
+      const chunkOfExperiences = _.chunk(Store.formDatas.experiences, 6)
+
       return (
         <Page size="A4" style={styles.page}>
           <View>
@@ -195,13 +304,26 @@ class ElegancyTemplate extends Component {
                   { Store.formDatas.bio.basic.about}
                 </Text>
                 <Text style={ styles.heading2 }>my skills</Text>
-                  <View style={ styles.skillWrap }>
+                  <View style={ styles.colWrap }>
                     { Store.formDatas.skills.skills.map((skill, index) => (
                       <SkillComponent key={ index } { ...skill } />
                     )) }
                   </View>
               </View>
-              <View style={ styles.thirdSectiion }></View>
+              <View style={ styles.thirdSection }>
+                <Text style={ styles.heading2 }>educations</Text>
+                <View style={ styles.colWrap }>
+                  { Store.formDatas.educations.map((edu, index) => (
+                    <ExperienceComponent key={ index } { ...edu } />
+                  ) )}
+                </View>
+                <Text style={ styles.heading2 }>experiences</Text>
+                <View style={ styles.colWrap }>
+                  { chunkOfExperiences[0].map((exp, index) => (
+                    <ExperienceComponent key={ index } { ...exp } />
+                  ) )}
+                </View>
+              </View>
             </View>
             <View style={ styles.firstSection }>
               <View style={ styles.image }></View>
@@ -213,6 +335,14 @@ class ElegancyTemplate extends Component {
                 { Store.formDatas.socials.map((social, index) => (
                   <SocialMediaComponent key={ index } { ...social } />
                 )) }
+              </View>
+              <View style={ styles.interest }>
+                <Text style={ styles.heading3 }>interest</Text>
+                <View style={ styles.colWrap }>
+                  { Store.formDatas.skills.interests.map((interest, index) => (
+                    <InterestComponent key={ index } { ...interest } />
+                  )) }
+                </View>
               </View>
             </View>
           </View>

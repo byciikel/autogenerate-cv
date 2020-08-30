@@ -1,6 +1,26 @@
 import { decorate, action, observable } from 'mobx'
 
 class Store {
+  iconList = [
+    'facebook',
+    'medium',
+    'pinterest',
+    'twitter',
+    'linkedin',
+    'github',
+    'document',
+    'barbell',
+    'bicycle',
+    'book',
+    'briefcase',
+    'brush',
+    'camera',
+    'desktop',
+    'film',
+    'game',
+    'headset'
+  ]
+
   formDatas = {
     fileName: "AutoGenerateCV",
     colors: ['#FAF455', '#4B4B4B', '#FFF'],
@@ -20,9 +40,9 @@ class Store {
       }
     },
     socials: [
-      { name: "Fawwaz Afif Alvian", icon: "logo-facebook", link: "https://www.google.com/" },
-      { name: "Fawwaz Afif Alvian", icon: "logo-twitter", link: "https://www.google.com/" },
-      { name: "Fawwaz Afif Alvian", icon: "logo-linkedin", link: "https://www.google.com/" },
+      { name: "Fawwaz Afif Alvian", icon: "pinterest", link: "https://www.google.com/" },
+      { name: "Fawwaz Afif Alvian", icon: "twitter", link: "https://www.google.com/" },
+      { name: "Fawwaz Afif Alvian", icon: "linkedin", link: "https://www.google.com/" },
     ],
     skills: {
       skills : [
@@ -36,18 +56,18 @@ class Store {
         { name: "Power Point", amount: 1.5 },
       ],
       interests : [
-        { name: "Design", icon: "color-palette-outline" },
-        { name: "Computer", icon: "desktop-outline" },
-        { name: "Game", icon: "game-controller-outline" },
-        { name: "Design", icon: "color-palette-outline" },
-        { name: "Computer", icon: "desktop-outline" },
-        { name: "Game", icon: "game-controller-outline" },
-        { name: "Design", icon: "color-palette-outline" },
-        { name: "Computer", icon: "desktop-outline" },
-        { name: "Game", icon: "game-controller-outline" },
-        { name: "Design", icon: "color-palette-outline" },
-        { name: "Computer", icon: "desktop-outline" },
-        { name: "Game", icon: "game-controller-outline" },
+        { name: "Design", icon: "brush" },
+        { name: "Computer", icon: "desktop" },
+        { name: "Game", icon: "game" },
+        { name: "Design", icon: "brush" },
+        { name: "Computer", icon: "desktop" },
+        { name: "Game", icon: "game" },
+        { name: "Design", icon: "brush" },
+        { name: "Computer", icon: "desktop" },
+        { name: "Game", icon: "game" },
+        { name: "Design", icon: "brush" },
+        { name: "Computer", icon: "desktop" },
+        { name: "Game", icon: "game" },
       ]
     },
     educations: [
