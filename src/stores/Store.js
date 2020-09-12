@@ -34,7 +34,7 @@ class Store {
       specific: {
         date_of_birth: new Date(),
         address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        phone: "085123456789",
+        phone: "+6285123456789",
         email: "examples@gmail.com",
         website: "www.examples.com",
       }
@@ -47,13 +47,13 @@ class Store {
     skills: {
       skills : [
         { name: "Microsoft", amount: 4 },
-        { name: "Photoshop", amount: 3.5 },
+        { name: "Photoshop", amount: 3 },
         { name: "Illustrator", amount: 4 },
         { name: "Indesign", amount: 3 },
         { name: "Coreldraw", amount: 2 },
         { name: "Premiere", amount: 5 },
         { name: "MS Word", amount: 2 },
-        { name: "Power Point", amount: 1.5 },
+        { name: "Power Point", amount: 1 },
       ],
       interests : [
         { name: "Design", icon: "brush" },
@@ -114,10 +114,6 @@ class Store {
     this.formDatas[data.type] = data.value
   }
 
-  setBiography(data) {
-    this.formDatas.bio[data.type][data.name] = data.value
-  }
-
   setSideBarActivedStatus(active) {
     this.isSideBarActive = active
   }
@@ -138,7 +134,6 @@ decorate(Store, {
   sideBarType: observable,
   setSideBarType: action,
   setFormData: action,
-  setBiography: action
 })
 
 const NewStore = new Store()

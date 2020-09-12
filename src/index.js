@@ -7,6 +7,7 @@ import 'mobx-react-lite/batchingForReactDom'
 import './index.css';
 import './css/tailwind.css'
 import 'animate.css';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 ReactDOM.render(
   <React.StrictMode>

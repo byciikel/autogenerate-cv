@@ -16,6 +16,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+input {
+  outline: none;
+}
+
 .avatar-wrapper {
   position: relative;
 }

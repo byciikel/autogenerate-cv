@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 import Store from '../../stores/Store'
 import ColorPicker from './ColorPicker'
 import Biography from './Biography'
+import Skills from './Skills'
 
 function Form() {
   const { sideBarType } = Store
@@ -14,6 +15,10 @@ function Form() {
     case "biography":
       return (
         <Biography />
+      )
+    case "skills":
+      return (
+        <Skills />
       )
     default:
       return (

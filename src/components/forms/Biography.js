@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { observer } from 'mobx-react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 import Store from '../../stores/Store'
 import avatar from '../../images/avatar.png'
 
 const Input = ({ name, value, onTextChange }) => {
-  if (name !== "about" && name !== "date_of_birth" && name !== "address") {
+  if (name !== "about" && name !== "date_of_birth" && name !== "address" && name !== "phone") {
     return (
       <div className="mb-4">
         <label className="block text-gray-700 text-sm mb-2 capitalize" htmlFor={ name }>
@@ -18,12 +20,13 @@ const Input = ({ name, value, onTextChange }) => {
           maxLength={ name === "name" ? '25' : '30' }
           value={ value }
           onChange={ (data) => onTextChange(data) }
-          type={ name === "phone" ? 'number' : 'text' }
+          type="text"
           placeholder={ name }
         />
       </div>
     )
-  } else {
+  }
+  else {
     return (
       <div/>
     )
@@ -143,6 +146,16 @@ class Biography extends Component {
             value={ this.state.formDatas.bio.specific.address }
             onChange={ (data) => this.onInputChange("address", data.target.value, "specific") }
           ></textarea>
+        </div>
+
+        <div className="mb-4">
+          <PhoneInput
+            className="focus:outline-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            defaultCountry="ID"
+            placeholder="Enter phone number"
+            value={ this.state.formDatas.bio.specific.phone }
+            onChange={ (data) => this.onInputChange("phone", data, "specific") }
+          />
         </div>
 
         { Object.entries(this.state.formDatas.bio.specific).map(([name, value], index) => (
