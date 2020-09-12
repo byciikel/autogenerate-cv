@@ -15,3 +15,18 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.avatar-text {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .1s, visibility .1s;
+}
+
+.avatar-wrapper:hover .avatar-text {
+  visibility: visible;
+  opacity: 1;
+}

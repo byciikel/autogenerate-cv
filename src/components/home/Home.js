@@ -52,6 +52,7 @@ import SideMenu from '../sideMenu/SideMenu'
 import SideBar from '../sideBar/SideBar'
 
 const Home = () => {
+
   return (
     <div>
       <Template />

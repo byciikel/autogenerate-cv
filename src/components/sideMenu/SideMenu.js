@@ -2,12 +2,19 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import Store from '../../stores/Store'
 
-function onMenuClicked(name) {
-  Store.setSideBarType(name)
-  Store.setSideBarActivedStatus(true)
+const onMenuClicked = async (name) => {
+  Store.setSideBarActivedStatus(false)
+  if (Store.sideBarType === null) {
+    Store.setSideBarType(name)
+    Store.setSideBarActivedStatus(true)
+  }
+  setTimeout(() => {
+    Store.setSideBarType(name)
+    Store.setSideBarActivedStatus(true)
+  }, 700)
 }
 
-function SideMenu({ name, icon }) {
+const SideMenu = ({ name, icon }) => {
 
   return (
     <div

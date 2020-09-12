@@ -23,7 +23,7 @@ export class SideBar extends Component {
       )
     } else {
       return (
-        <div></div>
+        <div/>
       )
     }
   }

@@ -4,7 +4,7 @@ import Store from '../../stores/Store'
 import { cx, css } from 'emotion'
 import { SketchPicker } from 'react-color';
 
-function ColorSelect({ color, setColor }) {
+const ColorSelect = ({ color, setColor }) => {
   return (
     <div
       onClick={() => setColor(color)}
@@ -40,7 +40,7 @@ class ColorPicker extends Component {
     return(
       <div>
         <div className="flex items-center justify-between mb-5">
-          <p className="bold">General Setting</p>
+          <p className="text-xl">Generals Setting</p>
           <div className="text-2xl cursor-pointer flex items-center" onClick={() => this.onClose()}>
             <ion-icon name="close-circle-outline"></ion-icon>
           </div>
@@ -51,10 +51,16 @@ class ColorPicker extends Component {
             <ColorSelect key={ index } color={ color } setColor={(selectedColor) => this.setSelectedColor(selectedColor, index)} />
           ))}
         </div>
-        <button
-          onClick={() => Store.setColor()}
-          className="focus:outline-none px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg text-gray-900 bg-red-200 cursor-pointer"
-        >Reset</button>
+        <div className="flex justify-between">
+          <button
+            onClick={() => Store.setColor()}
+            className="focus:outline-none px-4 py-2 mt-2 text-sm bg-transparent rounded-lg text-white bg-red-700 cursor-pointer"
+          >Reset</button>
+          <button
+            onClick={() => this.onClose()}
+            className="focus:outline-none px-4 py-2 mt-2 text-sm bg-transparent rounded-lg text-white bg-gray-700 cursor-pointer"
+          >Close</button>
+        </div>
       </div>
     )
   }

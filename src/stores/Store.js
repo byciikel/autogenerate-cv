@@ -32,17 +32,17 @@ class Store {
         about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rutrum elit a interdum bibendum. Nunc id ultrices mi. Mauris at elit at ipsum tempus congue mattis vel neque. Maecenas tellus elit, placerat non odio sed, malesuada fermentum eros. Nam at ipsum nec mauris pellentesque ultricies. Sed laoreet ex metus, sit amet volutpat leo bibendum a. Vestibulum auctor ante eu risus mattis imperdiet. Morbi id fringilla metus. Sed quis fermentum magna. Praesent placerat, quam at mollis pharetra, magna arcu convallis libero, at rutrum tellus neque venenatis sapien. Nulla scelerisque congue metus, at egestas nisi. Aenean at porttitor purus. Phasellus at egestas.",
       },
       specific: {
-        date_of_birth: "10 December 1998",
-        address: "Taman Puspa Sari F-20, Waru, Sidoarjo",
-        phone: "085791506780",
+        date_of_birth: new Date(),
+        address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        phone: "085123456789",
         email: "examples@gmail.com",
         website: "www.examples.com",
       }
     },
     socials: [
-      { name: "Fawwaz Afif Alvian", icon: "pinterest", link: "https://www.google.com/" },
-      { name: "Fawwaz Afif Alvian", icon: "twitter", link: "https://www.google.com/" },
-      { name: "Fawwaz Afif Alvian", icon: "linkedin", link: "https://www.google.com/" },
+      { name: "account name", icon: "pinterest", link: "/https://www.google.com/" },
+      { name: "account name", icon: "twitter", link: "/https://www.google.com/" },
+      { name: "account name", icon: "linkedin", link: "/https://www.google.com/" },
     ],
     skills: {
       skills : [
@@ -114,6 +114,10 @@ class Store {
     this.formDatas[data.type] = data.value
   }
 
+  setBiography(data) {
+    this.formDatas.bio[data.type][data.name] = data.value
+  }
+
   setSideBarActivedStatus(active) {
     this.isSideBarActive = active
   }
@@ -133,7 +137,8 @@ decorate(Store, {
   setSideBarActivedStatus: action,
   sideBarType: observable,
   setSideBarType: action,
-  setFormData: action
+  setFormData: action,
+  setBiography: action
 })
 
 const NewStore = new Store()
