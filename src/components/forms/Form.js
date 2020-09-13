@@ -5,6 +5,7 @@ import ColorPicker from './ColorPicker'
 import Biography from './Biography'
 import Skills from './Skills'
 import Interests from './Interests'
+import Socials from './Socials'
 
 function Form() {
   const { sideBarType } = Store
@@ -24,6 +25,10 @@ function Form() {
     case "interests":
       return (
         <Interests />
+      )
+    case "socials":
+      return (
+        <Socials />
       )
     default:
       return (

@@ -32,11 +32,12 @@ const SkillItems = ({ name, amount, setSkill }) => {
   return (
     <AccordionItem className="mt-3">
       <AccordionItemHeading>
-        <AccordionItemButton className="p-5 bg-gray-200 outline-none text-gray-700 hover:bg-green-500 hover:text-white">
+        <AccordionItemButton className="p-5 bg-gray-200 outline-none text-gray-700 hover:bg-green-500 hover:text-white capitalize">
             { name }
         </AccordionItemButton>
       </AccordionItemHeading>
       <AccordionItemPanel className="border-l-2 border-r-2 border-b-2 p-5">
+        <p className="text-sm text-black my-3">Skill Name</p>
         <input
           ref={ skillNameRef }
           className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -46,7 +47,7 @@ const SkillItems = ({ name, amount, setSkill }) => {
           defaultValue={ name }
         />
         <div className="flex justify-between items-center my-3">
-          <p className="text-lg text-black">Proficiency</p>
+          <p className="text-sm text-black my-3">Proficiency</p>
           <select className="border-2 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none"
             ref={ skillAmountRef }
             defaultValue={ amount }
@@ -147,13 +148,17 @@ class Skills extends Component {
           )) }
         </Accordion>
 
-        <div className="flex justify-center my-5">
-          <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl cursor-pointer hover:bg-green-700"
-            onClick={ () => this.addNewSkill() }
-          >
-            <ion-icon name="add-outline"></ion-icon>
+        { this.state.formDatas.skills.skills.length === 8 ?
+          <p className="my-5 text-sm text-center text-red-500">You hit the limit for skills</p>
+        :
+          <div className="flex justify-center my-5">
+            <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl cursor-pointer hover:bg-green-700"
+              onClick={ () => this.addNewSkill() }
+            >
+              <ion-icon name="add-outline"></ion-icon>
+            </div>
           </div>
-        </div>
+        }
       </div>
     )
   }

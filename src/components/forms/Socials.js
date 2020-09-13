@@ -10,31 +10,34 @@ import {
 
 import Store from '../../stores/Store'
 
-const IntrerestItems = ({ name, icon, setInterest }) => {
-  const interestNameRef = useRef(), interestIconRef = useRef()
+const SocialItems = ({ name, icon, link, setSocial }) => {
+  const socialNameRef = useRef(), socialIconRef = useRef(), socialLinkRef = useRef()
   
-  const saveInterest = () => {
-    const interest = {
-      name: interestNameRef.current.value,
-      icon: interestIconRef.current.value,
+  const saveSocial = () => {
+    const social = {
+      name: socialNameRef.current.value,
+      icon: socialIconRef.current.value,
+      link: "/" + socialLinkRef.current.value
     }
-    setInterest(interest, "update")
+    setSocial(social, "update")
   }
   
-  const deleteInterest = () => {
-    const interest = {
-      name: interestNameRef.current.value,
-      icon: interestIconRef.current.value,
+  const deleteSocial = () => {
+    const social = {
+      name: socialNameRef.current.value,
+      icon: socialIconRef.current.value,
+      link: "/" + socialLinkRef.current.value
     }
-    setInterest(interest, "delete")
+    setSocial(social, "delete")
   }
 
-  const saveInterestToState = () => {
-    const interest = {
-      name: interestNameRef.current.value,
-      icon: interestIconRef.current.value,
+  const saveSocialToState = () => {
+    const social = {
+      name: socialNameRef.current.value,
+      icon: socialIconRef.current.value,
+      link: "/" + socialLinkRef.current.value
     }
-    setInterest(interest, "update-to-state")
+    setSocial(social, "update-to-state")
   }
 
   return (
@@ -45,21 +48,21 @@ const IntrerestItems = ({ name, icon, setInterest }) => {
         </AccordionItemButton>
       </AccordionItemHeading>
       <AccordionItemPanel className="border-l-2 border-r-2 border-b-2 p-5">
-        <p className="text-sm text-black my-3">Field Name</p>
+        <p className="text-sm text-black my-3">Account Name</p>
         <input
-          ref={ interestNameRef }
+          ref={ socialNameRef }
           className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           maxLength="25"
           type="text"
-          placeholder="field name"
+          placeholder="account name"
           defaultValue={ name }
         />
         <p className="text-sm text-black my-3">Icon</p>
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex justify-between items-center">
           <select className="border-2 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none truncate w-32"
-            ref={ interestIconRef }
+            ref={ socialIconRef }
             defaultValue={ icon }
-            onChange={ () => saveInterestToState() }
+            onChange={ () => saveSocialToState() }
           >
             { Store.iconList.map((iconName, index) => (
               <option key={ index }
@@ -71,14 +74,22 @@ const IntrerestItems = ({ name, icon, setInterest }) => {
             <ion-icon name={ icon }></ion-icon>
           </div>
         </div>
+        <p className="text-sm text-black my-3">Icon</p>
+        <input
+          ref={ socialLinkRef }
+          className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-3"
+          type="text"
+          placeholder="social link"
+          defaultValue={ link.slice(1) }
+        />
         <div className="flex justify-between items-center text-2xl">
           <div className="cursor-pointer text-green-700"
-            onClick={ () => saveInterest()}
+            onClick={ () => saveSocial()}
           >
             <ion-icon name="checkmark-outline"></ion-icon>
           </div>
           <div className="cursor-pointer text-red-500"
-            onClick={ () => deleteInterest()}
+            onClick={ () => deleteSocial()}
           >
             <ion-icon name="trash-outline"></ion-icon>
           </div>
@@ -91,34 +102,31 @@ const IntrerestItems = ({ name, icon, setInterest }) => {
 class Interest extends Component {
   state = {
     formDatas: {
-      skills: {
-        skills: [ ...Store.formDatas.skills.skills ],
-        interests: [ ...Store.formDatas.skills.interests ],
-      },
+      socials: [ ...Store.formDatas.socials ]
     }
   }
 
-  onInterestChange = (interest, method, index) => {
-    let skills = { ...this.state.formDatas.skills }
+  onSocialChange = (social, method, index) => {
+    let formDatas = { ...this.state.formDatas }
     switch (method) {
       case "update":
-        skills["interests"][index] = interest
-        this.setState({ formDatas: { skills } })
+        formDatas["socials"][index] = social
+        this.setState({ formDatas })
         Store.setFormData({
-          type: "skills",
-          value: skills
+          type: "socials",
+          value: formDatas["socials"]
         })
         break;
       case "update-to-state":
-        skills["interests"][index] = interest
-        this.setState({ formDatas: { skills } })
+        formDatas["socials"][index] = social
+        this.setState({ formDatas })
         break;
       case "delete":
-        skills["interests"].splice(index, 1)
-        this.setState({ formDatas: { skills } })
+        formDatas["socials"].splice(index, 1)
+        this.setState({ formDatas })
         Store.setFormData({
-          type: "skills",
-          value: skills
+          type: "socials",
+          value: formDatas["socials"]
         })
         break;
       default:
@@ -126,25 +134,26 @@ class Interest extends Component {
     }
   }
 
-  addNewInterest = () => {
-    let skills = { ...this.state.formDatas.skills }
-    skills["interests"].push({
-      name: "New Interest",
-      icon: "desktop"
+  addNewSocial = () => {
+    let formDatas = { ...this.state.formDatas }
+    formDatas["socials"].push({
+      name: "New Social",
+      icon: "logo-facebook",
+      link: ""
     })
-    this.setState({ formDatas: { skills } })
+    this.setState({ formDatas })
   }
 
   onClose = () => {
     Store.setSideBarActivedStatus(false)
     setTimeout(function() { Store.setSideBarType(null) }, 1000);
   }
-
+  
   render() {
     return(
       <div className="w-64">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xl">Your Interest</p>
+          <p className="text-xl">Your Social</p>
           <div className="text-2xl cursor-pointer flex items-center" onClick={() => this.onClose()}>
             <ion-icon name="close-circle-outline"></ion-icon>
           </div>
@@ -155,21 +164,22 @@ class Interest extends Component {
           allowZeroExpanded={ true }
           className="border-0"
         >
-          { this.state.formDatas.skills.interests.map(({ name, icon }, index) => (
-            <IntrerestItems key={ index }
+          { this.state.formDatas.socials.map(({ name, icon, link }, index) => (
+            <SocialItems key={ index }
               name={ name }
               icon={ icon }
-              setInterest={ (interest, method) => this.onInterestChange(interest, method, index) }
+              link={ link }
+              setSocial={ (social, method) => this.onSocialChange(social, method, index) }
             />
           )) }
         </Accordion>
 
-        { this.state.formDatas.skills.interests.length === 12 ?
-          <p className="my-5 text-sm text-center text-red-500">You hit the limit for interests</p>
+        { this.state.formDatas.socials.length === 4 ?
+          <p className="my-5 text-sm text-center text-red-500">You hit the limit for social media</p>
         :
           <div className="flex justify-center my-5">
             <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl cursor-pointer hover:bg-green-700"
-              onClick={ () => this.addNewInterest() }
+              onClick={ () => this.addNewSocial() }
             >
               <ion-icon name="add-outline"></ion-icon>
             </div>
