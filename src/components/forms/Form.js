@@ -7,6 +7,7 @@ import Skills from './Skills'
 import Interests from './Interests'
 import Socials from './Socials'
 import Educations from './Educations'
+import Experiences from './Experiences'
 
 function Form() {
   const { sideBarType } = Store
@@ -34,6 +35,10 @@ function Form() {
     case "educations":
       return (
         <Educations />
+      )
+    case "experiences":
+      return (
+        <Experiences />
       )
     default:
       return (

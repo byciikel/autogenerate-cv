@@ -35,7 +35,7 @@ class Store {
         date_of_birth: new Date(),
         address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         phone: "+6285123456789",
-        email: "examples@gmail.com",
+        email: "examples@email.com",
         website: "www.examples.com",
       }
     },
@@ -71,18 +71,18 @@ class Store {
       ]
     },
     educations: [
-      { start: '2013', end: '2016', name: 'senior high school', description: 'MAN Sidoarjo' },
-      { start: '2016', end: '2020', name: 'college', description: 'Universitas Islam Negeri Sunan Ampel Surabaya' },
+      { start: '2013', end: '2016', name: 'senior high school', description: 'Lorem Ipsum is simply dummy text' },
+      { start: '2016', end: '2020', name: 'college', description: 'Lorem Ipsum is simply dummy text.' },
     ],
     experiences: [
-      { start: '2018', end: '2019', name: 'crew', description: 'Big Bad Wolf Surabaya' },
-      { start: '2018', end: '2019', name: 'crew', description: 'DBL Surabaya' },
-      { start: '2019', end: '2020', name: 'internship', description: 'Kemenag Jawa Timur' },
-      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', name: 'internship', description: 'Kemenag Jawa Timur' },
-      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
+      { start: '2018', end: '2019', name: 'crew', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2018', end: '2019', name: 'crew', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'internship', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'internship', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Lorem Ipsum is simply dummy text.' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Lorem Ipsum is simply dummy text.' },
     ],
     organizations: []
   }

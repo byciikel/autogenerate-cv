@@ -10,27 +10,27 @@ import {
 
 import Store from '../../stores/Store'
 
-const EducationItem = ({ name, description, start, end, setEducation }) => {
-  const educaitonNameRef = useRef(), educaitonDescriptionRef = useRef(), educationStartRef = useRef(), educationEndRef = useRef()
+const ExperienceItem = ({ name, description, start, end, setExperience }) => {
+  const experienceNameRef = useRef(), experienceDescriptionRef = useRef(), experienceStartRef = useRef(), experienceEndRef = useRef()
   
-  const saveEducation = () => {
+  const saveExperience = () => {
     const education = {
-      name: educaitonNameRef.current.value,
-      description: educaitonDescriptionRef.current.value,
-      start: educationStartRef.current.value,
-      end: educationEndRef.current.value
+      name: experienceNameRef.current.value,
+      description: experienceDescriptionRef.current.value,
+      start: experienceStartRef.current.value,
+      end: experienceEndRef.current.value
     }
-    setEducation(education, "update")
+    setExperience(education, "update")
   }
   
-  const deleteEducation = () => {
+  const deleteExperience = () => {
     const education = {
-      name: educaitonNameRef.current.value,
-      description: educaitonDescriptionRef.current.value,
-      start: educationStartRef.current.value,
-      end: educationEndRef.current.value
+      name: experienceNameRef.current.value,
+      description: experienceDescriptionRef.current.value,
+      start: experienceStartRef.current.value,
+      end: experienceEndRef.current.value
     }
-    setEducation(education, "delete")
+    setExperience(education, "delete")
   }
 
   return (
@@ -43,7 +43,7 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
       <AccordionItemPanel className="border-l-2 border-r-2 border-b-2 p-5">
         <p className="text-sm text-black my-3">Education Name</p>
         <input
-          ref={ educaitonNameRef }
+          ref={ experienceNameRef }
           className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           maxLength="25"
           type="text"
@@ -52,7 +52,7 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
         />
         <p className="text-sm text-black my-3">Description</p>
         <textarea
-          ref={ educaitonDescriptionRef }
+          ref={ experienceDescriptionRef }
           className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           maxLength="200"
           rows="5"
@@ -65,7 +65,7 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
         </div>
         <div className="flex justify-between items-center mb-3">
           <input
-            ref={ educationStartRef }
+            ref={ experienceStartRef }
             className="appearance-none border-2 rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none"
             maxLength="10"
             type="text"
@@ -73,7 +73,7 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
             defaultValue={ start }
           />
           <input
-            ref={ educationEndRef }
+            ref={ experienceEndRef }
             className="appearance-none border-2 rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none"
             maxLength="10"
             type="text"
@@ -83,12 +83,12 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
         </div>
         <div className="flex justify-between items-center text-2xl">
           <div className="cursor-pointer text-green-700"
-            onClick={ () => saveEducation()}
+            onClick={ () => saveExperience()}
           >
             <ion-icon name="checkmark-outline"></ion-icon>
           </div>
           <div className="cursor-pointer text-red-500"
-            onClick={ () => deleteEducation()}
+            onClick={ () => deleteExperience()}
           >
             <ion-icon name="trash-outline"></ion-icon>
           </div>
@@ -98,30 +98,30 @@ const EducationItem = ({ name, description, start, end, setEducation }) => {
   )
 }
 
-class Education extends Component {
+class Experience extends Component {
   state = {
     formDatas: {
-      educations: [ ...Store.formDatas.educations ]
+      experiences: [ ...Store.formDatas.experiences ]
     }
   }
 
-  onEducationChange = (education, method, index) => {
+  onEducationChange = (experience, method, index) => {
     let formDatas = { ...this.state.formDatas }
     switch (method) {
       case "update":
-        formDatas["educations"][index] = education
+        formDatas["experiences"][index] = experience
         this.setState({ formDatas })
         Store.setFormData({
-          type: "educations",
-          value: formDatas["educations"]
+          type: "experiences",
+          value: formDatas["experiences"]
         })
         break;
       case "delete":
-        formDatas["educations"].splice(index, 1)
+        formDatas["experiences"].splice(index, 1)
         this.setState({ formDatas })
         Store.setFormData({
-          type: "educations",
-          value: formDatas["educations"]
+          type: "experiences",
+          value: formDatas["experiences"]
         })
         break;
       default:
@@ -129,18 +129,18 @@ class Education extends Component {
     }
   }
 
-  addNewEducaiton = () => {
+  addNewExperience = () => {
     let formDatas = { ...this.state.formDatas }
-    formDatas["educations"].push({
+    formDatas["experiences"].push({
       start: new Date().getFullYear().toString(),
       end: new Date().getFullYear().toString(),
-      name: 'New Education',
+      name: 'New Experience',
       description: 'This is a description'
     })
     this.setState({ formDatas })
     Store.setFormData({
-      type: "educations",
-      value: formDatas["educations"]
+      type: "experiences",
+      value: formDatas["experiences"]
     })
   }
 
@@ -153,7 +153,7 @@ class Education extends Component {
     return(
       <div className="w-64">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xl">Your Education</p>
+          <p className="text-xl">Your Experience</p>
           <div className="text-2xl cursor-pointer flex items-center" onClick={() => this.onClose()}>
             <ion-icon name="close-circle-outline"></ion-icon>
           </div>
@@ -164,20 +164,20 @@ class Education extends Component {
           allowZeroExpanded={ true }
           className="border-0"
         >
-          { this.state.formDatas.educations.map(({ start, end, name, description }, index) => (
-            <EducationItem key={ index }
+          { this.state.formDatas.experiences.map(({ start, end, name, description }, index) => (
+            <ExperienceItem key={ index }
               start={ start }
               end={ end }
               name={ name }
               description={ description }
-              setEducation={ (education, method) => this.onEducationChange(education, method, index) }
+              setExperience={ (experience, method) => this.onEducationChange(experience, method, index) }
             />
           )) }
         </Accordion>
 
         <div className="flex justify-center my-5">
           <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl cursor-pointer hover:bg-green-700"
-            onClick={ () => this.addNewEducaiton() }
+            onClick={ () => this.addNewExperience() }
           >
             <ion-icon name="add-outline"></ion-icon>
           </div>
@@ -187,4 +187,4 @@ class Education extends Component {
   }
 }
 
-export default observer(Education)
+export default observer(Experience)

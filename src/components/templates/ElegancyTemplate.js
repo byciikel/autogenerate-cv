@@ -321,7 +321,7 @@ const ExperienceComponent = observer((data) => {
     wrap: {
       display: "flex",
       flexWrap: "wrap",
-      flexDirection: 'column',
+      flexDirection: 'row',
       justifyContent: "space-between",
       alignItems: "flex-start",
       width: '45%',
@@ -338,6 +338,7 @@ const ExperienceComponent = observer((data) => {
       marginBottom: '6pt'
     },
     p1: {
+      width: '100%',
       fontSize: '10pt',
       fontWeight: 700,
       textTransform: 'capitalize',
