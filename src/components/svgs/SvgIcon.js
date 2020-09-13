@@ -21,19 +21,19 @@ import PinterestIcon from './Pinterest'
 
 const SvgIcon = ({ name, color, width, height }) => {
   switch (name) {
-    case 'facebook':
+    case 'logo-facebook':
       return (
         <FacebookIcon color={ color } width={ width } height={ height } />
       )
-    case 'twitter':
+    case 'logo-twitter':
       return (
         <TwitterIcon color={ color } width={ width } height={ height } />
       )
-    case 'linkedin':
+    case 'logo-linkedin':
       return (
         <LinkedinIcon color={ color } width={ width } height={ height } />
       )
-    case 'document':
+    case 'document-text-sharp':
       return (
         <DocumentIcon color={ color } width={ width } height={ height } />
       )
@@ -69,7 +69,7 @@ const SvgIcon = ({ name, color, width, height }) => {
       return (
         <FilmIcon color={ color } width={ width } height={ height } />
       )
-    case 'game':
+    case 'game-controller':
       return (
         <GameIcon color={ color } width={ width } height={ height } />
       )
@@ -77,15 +77,15 @@ const SvgIcon = ({ name, color, width, height }) => {
       return (
         <HeadsetIcon color={ color } width={ width } height={ height } />
       )
-    case 'github':
+    case 'logo-github':
       return (
         <GithubIcon color={ color } width={ width } height={ height } />
       )
-    case 'medium':
+    case 'logo-medium':
       return (
         <MediumIcon color={ color } width={ width } height={ height } />
       )
-    case 'pinterest':
+    case 'logo-pinterest':
       return (
         <PinterestIcon color={ color } width={ width } height={ height } />
       )

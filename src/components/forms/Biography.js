@@ -77,7 +77,7 @@ class Biography extends Component {
     return(
       <div className="w-64">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xl">Abouts You</p>
+          <p className="text-xl">About You</p>
           <div className="text-2xl cursor-pointer flex items-center" onClick={() => this.onClose()}>
             <ion-icon name="close-circle-outline"></ion-icon>
           </div>

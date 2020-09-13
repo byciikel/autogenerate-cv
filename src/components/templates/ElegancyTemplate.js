@@ -291,6 +291,7 @@ const InterestComponent = observer((interest) => {
       flexWrap: "wrap",
       flexDirection: 'column',
       justifyContent: "space-between",
+      alignContent: 'center',
       alignItems: "center",
       width: '30%',
       marginVertical: '10pt',

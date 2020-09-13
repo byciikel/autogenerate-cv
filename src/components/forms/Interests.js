@@ -10,23 +10,31 @@ import {
 
 import Store from '../../stores/Store'
 
-const SkillItems = ({ name, amount, setSkill }) => {
-  const skillNameRef = useRef(), skillAmountRef = useRef()
+const SkillItems = ({ name, icon, setInterest }) => {
+  const interestNameRef = useRef(), interestIconRef = useRef()
   
-  const saveSkill = () => {
-    const skill = {
-      name: skillNameRef.current.value,
-      amount: skillAmountRef.current.value,
+  const saveInterest = () => {
+    const interest = {
+      name: interestNameRef.current.value,
+      icon: interestIconRef.current.value,
     }
-    setSkill(skill, "update")
+    setInterest(interest, "update")
   }
   
-  const deleteSkill = () => {
-    const skill = {
-      name: skillNameRef.current.value,
-      amount: skillAmountRef.current.value,
+  const deleteInterest = () => {
+    const interest = {
+      name: interestNameRef.current.value,
+      icon: interestIconRef.current.value,
     }
-    setSkill(skill, "delete")
+    setInterest(interest, "delete")
+  }
+
+  const saveInterestToState = () => {
+    const interest = {
+      name: interestNameRef.current.value,
+      icon: interestIconRef.current.value,
+    }
+    setInterest(interest, "update-to-state")
   }
 
   return (
@@ -38,34 +46,38 @@ const SkillItems = ({ name, amount, setSkill }) => {
       </AccordionItemHeading>
       <AccordionItemPanel className="border-l-2 border-r-2 border-b-2 p-5">
         <input
-          ref={ skillNameRef }
+          ref={ interestNameRef }
           className="appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-          maxLength="15"
+          maxLength="25"
           type="text"
-          placeholder="skill name"
+          placeholder="field name"
           defaultValue={ name }
         />
-        <div className="flex justify-between items-center my-3">
-          <p className="text-lg text-black">Proficiency</p>
-          <select className="border-2 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-            ref={ skillAmountRef }
-            defaultValue={ amount }
+        <p className="text-sm text-black my-3">Icon</p>
+        <div className="flex justify-between items-center mb-3">
+          <select className="border-2 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none truncate w-32"
+            ref={ interestIconRef }
+            defaultValue={ icon }
+            onChange={ () => saveInterestToState() }
           >
-            { [1, 2, 3, 4, 5].map((number, index) => (
+            { Store.iconList.map((iconName, index) => (
               <option key={ index }
-                value={ number }
-              >{ number }</option>
+                value={ iconName }
+              >{ iconName }</option>
             )) }
           </select>
+          <div className="text-2xl text-black">
+            <ion-icon name={ icon }></ion-icon>
+          </div>
         </div>
         <div className="flex justify-between items-center text-2xl">
           <div className="cursor-pointer text-green-700"
-            onClick={ () => saveSkill()}
+            onClick={ () => saveInterest()}
           >
             <ion-icon name="checkmark-outline"></ion-icon>
           </div>
           <div className="cursor-pointer text-red-500"
-            onClick={ () => deleteSkill()}
+            onClick={ () => deleteInterest()}
           >
             <ion-icon name="trash-outline"></ion-icon>
           </div>
@@ -75,7 +87,7 @@ const SkillItems = ({ name, amount, setSkill }) => {
   )
 }
 
-class Skills extends Component {
+class Interest extends Component {
   state = {
     formDatas: {
       skills: {
@@ -89,15 +101,19 @@ class Skills extends Component {
     let skills = { ...this.state.formDatas.skills }
     switch (method) {
       case "update":
-        skills["skills"][index] = skill
+        skills["interests"][index] = skill
         this.setState({ formDatas: { skills } })
         Store.setFormData({
           type: "skills",
           value: skills
         })
         break;
+      case "update-to-state":
+        skills["interests"][index] = skill
+        this.setState({ formDatas: { skills } })
+        break;
       case "delete":
-        skills["skills"].splice(index, 1)
+        skills["interests"].splice(index, 1)
         this.setState({ formDatas: { skills } })
         Store.setFormData({
           type: "skills",
@@ -111,9 +127,9 @@ class Skills extends Component {
 
   addNewSkill = () => {
     let skills = { ...this.state.formDatas.skills }
-    skills["skills"].push({
-      name: "New Skill",
-      amount: 1
+    skills["interests"].push({
+      name: "New Interest",
+      icon: "desktop"
     })
     this.setState({ formDatas: { skills } })
   }
@@ -127,7 +143,7 @@ class Skills extends Component {
     return(
       <div className="w-64">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xl">Your Skill</p>
+          <p className="text-xl">Your Interest</p>
           <div className="text-2xl cursor-pointer flex items-center" onClick={() => this.onClose()}>
             <ion-icon name="close-circle-outline"></ion-icon>
           </div>
@@ -138,11 +154,11 @@ class Skills extends Component {
           allowZeroExpanded={ true }
           className="border-0"
         >
-          { this.state.formDatas.skills.skills.map(({ name, amount }, index) => (
+          { this.state.formDatas.skills.interests.map(({ name, icon }, index) => (
             <SkillItems key={ index }
               name={ name }
-              amount={ amount }
-              setSkill={ (skill, method) => this.onSkillChange(skill, method, index) }
+              icon={ icon }
+              setInterest={ (skill, method) => this.onSkillChange(skill, method, index) }
             />
           )) }
         </Accordion>
@@ -159,4 +175,4 @@ class Skills extends Component {
   }
 }
 
-export default observer(Skills)
+export default observer(Interest)

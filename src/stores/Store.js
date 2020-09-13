@@ -2,13 +2,13 @@ import { decorate, action, observable } from 'mobx'
 
 class Store {
   iconList = [
-    'facebook',
-    'medium',
-    'pinterest',
-    'twitter',
-    'linkedin',
-    'github',
-    'document',
+    'logo-facebook',
+    'logo-medium',
+    'logo-pinterest',
+    'logo-twitter',
+    'logo-linkedin',
+    'logo-github',
+    'document-text-sharp',
     'barbell',
     'bicycle',
     'book',
@@ -17,7 +17,7 @@ class Store {
     'camera',
     'desktop',
     'film',
-    'game',
+    'game-controller',
     'headset'
   ]
 
@@ -40,34 +40,34 @@ class Store {
       }
     },
     socials: [
-      { name: "account name", icon: "pinterest", link: "/https://www.google.com/" },
-      { name: "account name", icon: "twitter", link: "/https://www.google.com/" },
-      { name: "account name", icon: "linkedin", link: "/https://www.google.com/" },
+      { name: "account name", icon: "logo-pinterest", link: "/https://www.google.com/" },
+      { name: "account name", icon: "logo-twitter", link: "/https://www.google.com/" },
+      { name: "account name", icon: "logo-linkedin", link: "/https://www.google.com/" },
     ],
     skills: {
       skills : [
-        { name: "Microsoft", amount: 4 },
-        { name: "Photoshop", amount: 3 },
-        { name: "Illustrator", amount: 4 },
-        { name: "Indesign", amount: 3 },
-        { name: "Coreldraw", amount: 2 },
-        { name: "Premiere", amount: 5 },
-        { name: "MS Word", amount: 2 },
-        { name: "Power Point", amount: 1 },
+        { name: "First Skill", amount: 4 },
+        { name: "Second Skill", amount: 3 },
+        { name: "Third Skill", amount: 4 },
+        { name: "Fourth Skill", amount: 3 },
+        { name: "Fifth Skill", amount: 2 },
+        { name: "Sixth Skill", amount: 5 },
+        { name: "Seventh Skill", amount: 2 },
+        { name: "Eighth Skill", amount: 1 },
       ],
       interests : [
         { name: "Design", icon: "brush" },
         { name: "Computer", icon: "desktop" },
-        { name: "Game", icon: "game" },
+        { name: "Game", icon: "game-controller" },
         { name: "Design", icon: "brush" },
         { name: "Computer", icon: "desktop" },
-        { name: "Game", icon: "game" },
+        { name: "Game", icon: "game-controller" },
         { name: "Design", icon: "brush" },
         { name: "Computer", icon: "desktop" },
-        { name: "Game", icon: "game" },
+        { name: "Game", icon: "game-controller" },
         { name: "Design", icon: "brush" },
         { name: "Computer", icon: "desktop" },
-        { name: "Game", icon: "game" },
+        { name: "Game", icon: "game-controller" },
       ]
     },
     educations: [
