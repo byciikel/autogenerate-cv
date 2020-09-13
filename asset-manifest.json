@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.936c95f8.chunk.css",
-    "main.js": "/static/js/main.7d19dc8d.chunk.js",
-    "main.js.map": "/static/js/main.7d19dc8d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c7d87c2e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c7d87c2e.js.map",
-    "static/css/2.b6003a1c.chunk.css": "/static/css/2.b6003a1c.chunk.css",
-    "static/js/2.469bc4e2.chunk.js": "/static/js/2.469bc4e2.chunk.js",
-    "static/js/2.469bc4e2.chunk.js.map": "/static/js/2.469bc4e2.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.800e537922acc792a98a3e4e5c219436.js": "/precache-manifest.800e537922acc792a98a3e4e5c219436.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.b6003a1c.chunk.css.map": "/static/css/2.b6003a1c.chunk.css.map",
-    "static/css/main.936c95f8.chunk.css.map": "/static/css/main.936c95f8.chunk.css.map",
-    "static/js/2.469bc4e2.chunk.js.LICENSE.txt": "/static/js/2.469bc4e2.chunk.js.LICENSE.txt",
-    "static/media/Poppins-Bold.ttf": "/static/media/Poppins-Bold.a3e0b5f4.ttf",
-    "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.8b6af8e5.ttf",
-    "static/media/avatar.png": "/static/media/avatar.01bed0d6.png"
+    "main.css": "/autogenerate-cv/static/css/main.936c95f8.chunk.css",
+    "main.js": "/autogenerate-cv/static/js/main.29ef6724.chunk.js",
+    "main.js.map": "/autogenerate-cv/static/js/main.29ef6724.chunk.js.map",
+    "runtime-main.js": "/autogenerate-cv/static/js/runtime-main.fded9f2a.js",
+    "runtime-main.js.map": "/autogenerate-cv/static/js/runtime-main.fded9f2a.js.map",
+    "static/css/2.b6003a1c.chunk.css": "/autogenerate-cv/static/css/2.b6003a1c.chunk.css",
+    "static/js/2.da168660.chunk.js": "/autogenerate-cv/static/js/2.da168660.chunk.js",
+    "static/js/2.da168660.chunk.js.map": "/autogenerate-cv/static/js/2.da168660.chunk.js.map",
+    "index.html": "/autogenerate-cv/index.html",
+    "precache-manifest.3a2aef8056949e3b76f5bf478292f49c.js": "/autogenerate-cv/precache-manifest.3a2aef8056949e3b76f5bf478292f49c.js",
+    "service-worker.js": "/autogenerate-cv/service-worker.js",
+    "static/css/2.b6003a1c.chunk.css.map": "/autogenerate-cv/static/css/2.b6003a1c.chunk.css.map",
+    "static/css/main.936c95f8.chunk.css.map": "/autogenerate-cv/static/css/main.936c95f8.chunk.css.map",
+    "static/js/2.da168660.chunk.js.LICENSE.txt": "/autogenerate-cv/static/js/2.da168660.chunk.js.LICENSE.txt",
+    "static/media/Poppins-Bold.ttf": "/autogenerate-cv/static/media/Poppins-Bold.a3e0b5f4.ttf",
+    "static/media/Poppins-Regular.ttf": "/autogenerate-cv/static/media/Poppins-Regular.8b6af8e5.ttf",
+    "static/media/avatar.png": "/autogenerate-cv/static/media/avatar.01bed0d6.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.c7d87c2e.js",
+    "static/js/runtime-main.fded9f2a.js",
     "static/css/2.b6003a1c.chunk.css",
-    "static/js/2.469bc4e2.chunk.js",
+    "static/js/2.da168660.chunk.js",
     "static/css/main.936c95f8.chunk.css",
-    "static/js/main.7d19dc8d.chunk.js"
+    "static/js/main.29ef6724.chunk.js"
   ]
 }
