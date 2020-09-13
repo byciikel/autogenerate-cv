@@ -117,6 +117,10 @@ class Skills extends Component {
       amount: 1
     })
     this.setState({ formDatas: { skills } })
+    Store.setFormData({
+      type: "skills",
+      value: skills
+    })
   }
 
   onClose = () => {

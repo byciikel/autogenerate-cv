@@ -133,6 +133,10 @@ class Interest extends Component {
       icon: "desktop"
     })
     this.setState({ formDatas: { skills } })
+    Store.setFormData({
+      type: "skills",
+      value: skills
+    })
   }
 
   onClose = () => {

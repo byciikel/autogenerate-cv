@@ -354,8 +354,8 @@ const ExperienceComponent = observer((data) => {
       <View style={ expStyles.date }>
         <Text>{ data.start }-{ data.end }</Text>
       </View>
-      <Text style={ expStyles.p1 }>{ data.type }</Text>
-      <Text style={ expStyles.p2 }>{ data.name }</Text>
+      <Text style={ expStyles.p1 }>{ data.name }</Text>
+      <Text style={ expStyles.p2 }>{ data.description }</Text>
     </View>
   )
 })

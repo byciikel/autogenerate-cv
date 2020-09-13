@@ -71,18 +71,18 @@ class Store {
       ]
     },
     educations: [
-      { start: '2013', end: '2016', type: 'senior high school', name: 'MAN Sidoarjo', majors: '' },
-      { start: '2016', end: '2020', type: 'college', name: 'Universitas Islam Negeri Sunan Ampel Surabaya', majors: 'Information System' },
+      { start: '2013', end: '2016', name: 'senior high school', description: 'MAN Sidoarjo' },
+      { start: '2016', end: '2020', name: 'college', description: 'Universitas Islam Negeri Sunan Ampel Surabaya' },
     ],
     experiences: [
-      { start: '2018', end: '2019', type: 'crew', name: 'Big Bad Wolf Surabaya' },
-      { start: '2018', end: '2019', type: 'crew', name: 'DBL Surabaya' },
-      { start: '2019', end: '2020', type: 'internship', name: 'Kemenag Jawa Timur' },
-      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', type: 'internship', name: 'Kemenag Jawa Timur' },
-      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
-      { start: '2019', end: '2020', type: 'data entry', name: 'Pakaidonk Startup' },
+      { start: '2018', end: '2019', name: 'crew', description: 'Big Bad Wolf Surabaya' },
+      { start: '2018', end: '2019', name: 'crew', description: 'DBL Surabaya' },
+      { start: '2019', end: '2020', name: 'internship', description: 'Kemenag Jawa Timur' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', name: 'internship', description: 'Kemenag Jawa Timur' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
+      { start: '2019', end: '2020', name: 'data entry', description: 'Pakaidonk Startup' },
     ],
     organizations: []
   }
